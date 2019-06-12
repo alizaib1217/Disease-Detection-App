@@ -1,0 +1,32 @@
+[
+  {
+    "patientName": "John Smith",
+    "result": "0(No)",
+    "dateOfTest": "12 March, 2019"
+  },
+  {
+    "patientName": "James Bond",
+    "result": "1(Yes)",
+    "dateOfTest": "15 April, 2019"
+  },
+  {
+    "patientName": "Robert Downey",
+    "result": "1(Yes)",
+    "dateOfTest": "12 May, 2019"
+  },
+  {
+    "patientName": "James Smith",
+    "result": "0(No)",
+    "dateOfTest": "12 june, 2019"
+  },
+  {
+    "patientName": "William Cooper",
+    "result": "1(Yes)",
+    "dateOfTest": "12 July, 2019"
+  },
+  {
+    "patientName": "John Smith",
+    "result": "1(Yes)",
+    "dateOfTest": "12 January, 2019"
+  }
+]

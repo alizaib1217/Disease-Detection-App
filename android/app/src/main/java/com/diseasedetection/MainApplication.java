@@ -1,8 +1,10 @@
 package com.diseasedetection;
 
 import android.app.Application;
-
+import cl.json.RNSharePackage;
+import cl.json.ShareApplication;
 import com.facebook.react.ReactApplication;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -26,7 +28,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNGestureHandlerPackage()
+            new LinearGradientPackage(),
+            new RNGestureHandlerPackage(),
+            new RNSharePackage()
       );
     }
 
