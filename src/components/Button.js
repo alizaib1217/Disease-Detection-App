@@ -10,11 +10,11 @@ export default class Button extends React.Component {
     const fontSize = this.props.textStyle && this.props.textStyle.fontSize ?
       this.props.textStyle.fontSize :
       undefined;
-
+    const color = this.props.color ? this.props.color : ["#e7161e", "#da151c", "#cd141b", "#c01319", "#b31217"];
     return (
       <LinearGradient
         start={{x: 1, y: 0}} end={{x: 0, y: 0}}
-        colors={["#e7161e", "#da151c", "#cd141b", "#c01319", "#b31217"]}
+        colors={color}
         style={[styles.gradientStyle, this.props.gradientStyle]}
       >
         <TouchableOpacity

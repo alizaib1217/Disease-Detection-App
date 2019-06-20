@@ -103,7 +103,7 @@ export default class ItemDetail extends React.Component {
         </Content>
         <Button
           onPress={this.onShare.bind(this)}
-          gradientStyle={{width: wp("80%"),}}
+          gradientStyle={{width: wp("80%"),alignSelf:"center"}}
           text={"Share Test"}
         />
       </Container>

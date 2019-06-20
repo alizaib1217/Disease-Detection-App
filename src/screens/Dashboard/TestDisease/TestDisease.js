@@ -21,6 +21,9 @@ export default class TestDisease extends React.Component {
       case 1:
         this.props.navigation.navigate("DiabeticRetinopathy", {item});
         break;
+      case 2:
+        this.props.navigation.navigate("KneeMri", {item});
+        break;
       default:
         break;
     }

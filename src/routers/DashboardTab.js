@@ -19,7 +19,7 @@ const NavigationOptions = {
     )
   },
   TestDisease: {
-    tabBarLabel: "Test",
+    tabBarLabel: "Detect",
     tabBarIcon: ({tintColor}) => (
       <Image
         source={require("../../assets/icons/add.png")}

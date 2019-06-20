@@ -7,6 +7,7 @@ import Content from "../../../../components/Content";
 import ItemText from "../../../../constants/text";
 import Button from "../../../../components/Button";
 import SettingsItem from "./SettingsItem";
+import Icons from "../../../../constants/icon";
 
 const {width} = Dimensions.get('window');
 
@@ -16,6 +17,8 @@ export default class Settings extends React.Component {
     return (
       <Container>
         <AppHeader
+          left={Icons.Back({tintColor: "#fff", height: wp("5%")})}
+          leftPress={() => this.props.navigation.goBack()}
           body={ItemText.Settings({color: "#fff"})}
         />
         <Content>
@@ -25,10 +28,11 @@ export default class Settings extends React.Component {
           />
           <SettingsItem text={"Terms & Services"} onPress={() => null}/>
           <SettingsItem text={"Privacy Policy"} onPress={() => null}/>
+          <SettingsItem text={"Edit Profile"} onPress={() => null}/>
         </Content>
         <Button
           onPress={() => this.props.navigation.navigate("Auth")}
-          gradientStyle={{width: wp("80%"),}}
+          gradientStyle={{width: wp("80%"),alignSelf:"center"}}
           text={"Logout"}
         />
       </Container>

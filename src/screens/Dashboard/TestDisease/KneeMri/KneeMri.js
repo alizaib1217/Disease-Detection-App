@@ -13,7 +13,7 @@ import Button from "../../../../components/Button";
 
 const {width} = Dimensions.get('window');
 
-export default class LungsDisease extends React.Component {
+export default class KneeMri extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,11 +35,11 @@ export default class LungsDisease extends React.Component {
         <AppHeader
           left={Icons.Back({tintColor: "#fff", height: wp("5%")})}
           leftPress={() => this.props.navigation.goBack()}
-          body={ItemText.Text({color: "#fff"}, `Lungs Disease`)}
+          body={ItemText.Text({color: "#fff"}, `Knee Mri`)}
         />
         <Content style={{}}>
           <Image
-            source={require("../../../../../assets/images/lung.jpg")}
+            source={require("../../../../../assets/images/kneeMri.jpg")}
             style={{
               height: wp("50%"),
               width: wp("100%"),
@@ -70,7 +70,7 @@ export default class LungsDisease extends React.Component {
                 textStyle={{color:Color.PrimaryText}}
                 color={["#e2ebf0","#dde6ec","#d8e2e7","#d4dde3","#cfd9df"]}
                 // onPress={this.onSendPressed.bind(this)}
-                text={"Select MRI Image(.dcm)"}
+                text={"Select MRI Image(.pck)"}
               />
 
             </View>

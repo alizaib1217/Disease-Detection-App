@@ -30,7 +30,7 @@ export default class AppHeader extends Component {
         <View style={[styles.right, this.props.rightStyle]}>
           {
             this.props.right &&
-            <TouchableOpacity onPress={this.props.rightPress}>
+            <TouchableOpacity style={{paddingHorizontal:10}} onPress={this.props.rightPress}>
               {this.props.right}
             </TouchableOpacity>
           }

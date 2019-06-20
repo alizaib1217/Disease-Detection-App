@@ -10,7 +10,7 @@ const Router = createSwitchNavigator(
     MainStack: MainStack,
   },
   {
-    initialRouteName: "MainStack"
+    initialRouteName: "Intro"
   }
 );
 
