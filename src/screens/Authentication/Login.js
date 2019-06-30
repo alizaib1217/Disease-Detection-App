@@ -8,10 +8,13 @@ import Container from "../../components/Container";
 import InputField from "../../components/InputField";
 import Icons from "../../constants/icon";
 import Button from "../../components/Button";
+import {loadUserInState, loadUserTokenInState} from "../../actions/loadUserInState";
+import {connect} from "react-redux";
+import {loginUserAction} from "../../actions/loginUserAction";
 
 const {width} = Dimensions.get('window');
 
-export default class Login extends React.Component {
+class Login extends React.Component {
   state = {
     email: "",
     password: "",
@@ -31,6 +34,7 @@ export default class Login extends React.Component {
   }
 
   onSignInPress() {
+    this.props.loginUser({}, this.props.navigation);
     let validateEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
     const {email, password} = this.state;
     this.props.navigation.navigate("Dashboard");
@@ -38,6 +42,7 @@ export default class Login extends React.Component {
     else if (!validateEmail.test(email)) this.setState({errorMessage: "Please enter a valid email address"});
     else if (password === "") this.setState({errorMessage: "Please enter your password"});
     else {
+
     }
   }
 
@@ -71,7 +76,7 @@ export default class Login extends React.Component {
                 this.getErrorMessage()
               }
               <InputField
-                leftIcon={Icons.Email({width: 18, tintColor:"#bfbfbf",resizeMode: 'contain'})}
+                leftIcon={Icons.Email({width: 18, tintColor: "#bfbfbf", resizeMode: 'contain'})}
                 keyboardType={'default'}
                 placeholder="Enter your email"
                 value={this.state.email}
@@ -79,7 +84,7 @@ export default class Login extends React.Component {
               />
               <InputField
                 secureTextEntry
-                leftIcon={Icons.Password({width: 18,  tintColor:"#bfbfbf",resizeMode: 'contain'})}
+                leftIcon={Icons.Password({width: 18, tintColor: "#bfbfbf", resizeMode: 'contain'})}
                 keyboardType={'default'}
                 placeholder="Enter your Password"
                 value={this.state.password}
@@ -126,6 +131,18 @@ export default class Login extends React.Component {
 }
 
 
+const mapStateToProps = state => {
+  return {
+    user: state.userAuth
+  }
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    loginUser: (body, navigation) => dispatch(loginUserAction(body, navigation)),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 const styles = {
   content: {
     flex: 1,
@@ -134,10 +151,8 @@ const styles = {
   topArea: {
     flex: 1,
     justifyContent: "space-between",
-    // padding: 20,
   },
   logoContainer: {
-    // flex: 1,
     alignSelf: 'center'
   },
   logo: {

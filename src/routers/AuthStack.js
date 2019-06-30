@@ -11,7 +11,7 @@ const AuthStack = createStackNavigator(
     ForgotPassword:ForgotPassword
   },
   {
-    initialRouteName: "ForgotPassword",
+    initialRouteName: "Login",
     headerMode: 'none',
     cardStyle: {
       backgroundColor: Color.BackgroundColor

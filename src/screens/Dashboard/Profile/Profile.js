@@ -9,12 +9,14 @@ import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import ResponsiveText from "../../../components/ResponsiveText";
 import Fonts from "../../../constants/fonts";
 import Color from "../../../constants/color";
+import {connect} from "react-redux";
 
 const {width} = Dimensions.get('window');
 
-export default class Profile extends React.Component {
+class Profile extends React.Component {
 
   render() {
+    const {user} = this.props;
     return (
       <Container>
         <AppHeader
@@ -31,20 +33,20 @@ export default class Profile extends React.Component {
               style={{height: wp("30%"), width: wp("30%"), borderRadius: wp("30%")}}
             />
             <ResponsiveText style={{marginTop: 5, fontSize: "5%", fontFamily: Fonts.CrimsonTextSemiBold}}>
-              Maria Hernandez
+              {user.name}
             </ResponsiveText>
             <ResponsiveText style={{color: Color.Placeholder}}>
-              mariahernandez@gmail.com
+              {user.email}
             </ResponsiveText>
           </View>
           <View style={{
-            marginTop:20,
+            marginTop: 20,
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between"
           }}>
             <View style={{justifyContent: "center", alignItems: "center"}}>
-              <ResponsiveText style={{fontFamily:Fonts.CrimsonTextSemiBold}}>
+              <ResponsiveText style={{fontFamily: Fonts.CrimsonTextSemiBold}}>
                 No Of Test Taken
               </ResponsiveText>
               <ResponsiveText style={{color: Color.Primary}}>
@@ -52,7 +54,7 @@ export default class Profile extends React.Component {
               </ResponsiveText>
             </View>
             <View style={{justifyContent: "center", alignItems: "center"}}>
-              <ResponsiveText style={{fontFamily:Fonts.CrimsonTextSemiBold}}>
+              <ResponsiveText style={{fontFamily: Fonts.CrimsonTextSemiBold}}>
                 Last Test Submitted
               </ResponsiveText>
               <ResponsiveText style={{color: Color.Primary}}>
@@ -60,8 +62,8 @@ export default class Profile extends React.Component {
               </ResponsiveText>
             </View>
           </View>
-          <View style={{marginTop:20}}>
-            <ResponsiveText style={{fontFamily:Fonts.CrimsonTextSemiBold}}>
+          <View style={{marginTop: 20}}>
+            <ResponsiveText style={{fontFamily: Fonts.CrimsonTextSemiBold}}>
               About Me
             </ResponsiveText>
             <ResponsiveText style={{color: Color.Placeholder, textAlign: "justify",}}>
@@ -76,5 +78,15 @@ export default class Profile extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.userAuth.user
+  }
+};
+const mapDispatchToProps = dispatch => {
+  return {}
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 const styles = {};

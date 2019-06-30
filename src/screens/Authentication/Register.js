@@ -8,10 +8,13 @@ import Container from "../../components/Container";
 import InputField from "../../components/InputField";
 import Icons from "../../constants/icon";
 import Button from "../../components/Button";
+import {loginUserAction} from "../../actions/loginUserAction";
+import {connect} from "react-redux";
+import {registerUserAction} from "../../actions/registerUserAction";
 
 const {width} = Dimensions.get('window');
 
-export default class Register extends React.Component {
+class Register extends React.Component {
   state = {
     name: "",
     email: "",
@@ -44,11 +47,13 @@ export default class Register extends React.Component {
   onSignInPress() {
     let validateEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
     const {email, password} = this.state;
-
     if (email === "") this.setState({errorMessage: "Please enter email first"});
     else if (!validateEmail.test(email)) this.setState({errorMessage: "Please enter a valid email address"});
     else if (password === "") this.setState({errorMessage: "Please enter your password"});
     else {
+      this.props.registerUser({
+        email,password,
+      }, this.props.navigation);
     }
   }
 
@@ -144,6 +149,18 @@ export default class Register extends React.Component {
 }
 
 
+const mapStateToProps = state => {
+  return {
+    user: state.userAuth
+  }
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    registerUser: (body, navigation) => dispatch(registerUserAction(body, navigation)),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
 const styles = {
   content: {
     flex: 1,

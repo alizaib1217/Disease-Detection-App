@@ -18,7 +18,10 @@
     "react-native-linear-gradient": "^2.5.4",
     "react-native-responsive-screen": "^1.2.2",
     "react-native-share": "^1.2.1",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.11.0",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
