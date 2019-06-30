@@ -10,6 +10,7 @@ import InputField from "../../../../components/InputField";
 import ResponsiveText from "../../../../components/ResponsiveText";
 import Color from "../../../../constants/color";
 import Button from "../../../../components/Button";
+import FilePickerManager from 'react-native-file-picker';
 
 const {width} = Dimensions.get('window');
 
@@ -23,9 +24,31 @@ export default class LungsDisease extends React.Component {
     }
   }
 
-  onSendPressed() {
-    this.props.navigation.navigate("Dashboard")
+  onSelectFilePressed() {
+    console.warn('I am called');
+    FilePickerManager.showFilePicker(null, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled file picker');
+      }
+      else if (response.error) {
+        console.log('FilePickerManager Error: ', response.error);
+      }
+      else {
+        console.warn(response)
+        this.setState({
+          file: response
+        });
+      }
+    });
   }
+
+  onSendPressed() {
+    // this.props.navigation.navigate("Dashboard")
+
+  }
+
 
   render() {
     const {params} = this.props.navigation.state;
@@ -67,9 +90,9 @@ export default class LungsDisease extends React.Component {
                 onChangeText={(patientAge) => this.setState({patientAge})}
               />
               <Button
-                textStyle={{color:Color.PrimaryText}}
-                color={["#e2ebf0","#dde6ec","#d8e2e7","#d4dde3","#cfd9df"]}
-                // onPress={this.onSendPressed.bind(this)}
+                textStyle={{color: Color.PrimaryText}}
+                color={["#e2ebf0", "#dde6ec", "#d8e2e7", "#d4dde3", "#cfd9df"]}
+                onPress={this.onSelectFilePressed.bind(this)}
                 text={"Select MRI Image(.dcm)"}
               />
 
