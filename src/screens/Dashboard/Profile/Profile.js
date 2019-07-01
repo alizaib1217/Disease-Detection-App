@@ -10,11 +10,49 @@ import ResponsiveText from "../../../components/ResponsiveText";
 import Fonts from "../../../constants/fonts";
 import Color from "../../../constants/color";
 import {connect} from "react-redux";
+import {getPatientResults} from "../../../api/patient";
 
 const {width} = Dimensions.get('window');
 
 class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      noOfTest:0,
+    }
+  }
 
+  componentWillMount(): void {
+    this.getResultList();
+
+    this.interval = setInterval(() => {
+      this.getResultList()
+
+    }, 5000)
+  }
+
+  componentWillUnmount(): void {
+    clearInterval(this.interval)
+  }
+
+  getResultList() {
+    let {user} = this.props;
+    getPatientResults(user._id)
+      .then(res => res.data)
+      .then(res => {
+        if (res.status) {
+          this.setState({
+            noOfTest: res.data.test.length
+          });
+        }
+      })
+      .catch(err => console.warn(err))
+      .done(() => {
+        this.setState({
+          loading: false
+        })
+      })
+  }
   render() {
     const {user} = this.props;
     return (
@@ -47,18 +85,18 @@ class Profile extends React.Component {
           }}>
             <View style={{justifyContent: "center", alignItems: "center"}}>
               <ResponsiveText style={{fontFamily: Fonts.CrimsonTextSemiBold}}>
-                No Of Test Taken
+                Occupation
               </ResponsiveText>
               <ResponsiveText style={{color: Color.Primary}}>
-                15
+                {user.occupation}
               </ResponsiveText>
             </View>
             <View style={{justifyContent: "center", alignItems: "center"}}>
               <ResponsiveText style={{fontFamily: Fonts.CrimsonTextSemiBold}}>
-                Last Test Submitted
+                No Of Test Taken
               </ResponsiveText>
               <ResponsiveText style={{color: Color.Primary}}>
-                Lungs Disease
+                {this.state.noOfTest}
               </ResponsiveText>
             </View>
           </View>

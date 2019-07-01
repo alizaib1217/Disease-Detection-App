@@ -4,15 +4,25 @@ import ResponsiveText from "../../../components/ResponsiveText";
 import {widthPercentageToDP as wp} from "react-native-responsive-screen";
 import Color from "../../../constants/color";
 import Register from "../../Authentication/Register";
+import {API_URL, IMAGE_URL} from "../../../configs/API";
+import moment from "moment";
 
 const {width} = Dimensions.get('window');
 
 export default class HomeItem extends React.Component {
+  getDate(date) {
+    if (date) {
+      let m = new moment(date);
+      let formatted = m.format("LLL");
+      return formatted;
+    }
+  }
+
   render() {
     const {item} = this.props;
     return (
       <TouchableOpacity
-        onPress={()=>this.props.onItemPress(item)}
+        onPress={() => this.props.onItemPress(item)}
         style={{
           flexDirection: "row",
           alignItems: "center",
@@ -24,7 +34,7 @@ export default class HomeItem extends React.Component {
         }}>
         <View style={{}}>
           <Image
-            source={require("../../../../assets/images/lung.jpg")}
+            source={{uri: `${IMAGE_URL + item.image.url}`}}
             style={{height: wp("20%"), width: wp("20%"),}}
           />
         </View>
@@ -32,20 +42,19 @@ export default class HomeItem extends React.Component {
           <ResponsiveText style={{fontSize: "4.5%", fontWeight: "400", color: Color.Primary}}>
             Patient Name:{" "}
             <ResponsiveText>
-              {item.patientName}
+              {item.name}
             </ResponsiveText>
           </ResponsiveText>
           <ResponsiveText style={{color: Color.Primary}}>
             Result: {" "}
             <ResponsiveText>
-              {item.result}
+              {item.class}
             </ResponsiveText>
           </ResponsiveText>
           <ResponsiveText style={{color: Color.Primary}}>
             Date Of Test: {" "}
             <ResponsiveText>
-              {item.dateOfTest}
-
+              {this.getDate(item.createdAt)}
             </ResponsiveText>
           </ResponsiveText>
         </View>

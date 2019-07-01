@@ -5,23 +5,38 @@ import {
 } from "../constants/reduxConstants";
 import {AsyncStorage} from "react-native"
 import {NavigationActions, StackActions} from "react-navigation";
+import {userSignUp} from "../api/user";
 
 export function registerUserAction(body, navigation) {
   return dispatch => {
     dispatch({
       type: REGISTER_USER_START
     });
-    let user = {
+    userSignUp(body)
+      .then(res => res.data)
+      .then(async res => {
+        if (res.status == true) {
+          let {user, token} = res.data;
+          // // TODO: Get the user's object eg. {name, email, ...}
+          await AsyncStorage.setItem("USER", JSON.stringify(user));
+          await AsyncStorage.setItem("TOKEN", JSON.stringify(token));
+          dispatch({
+            type: REGISTER_USER_SUCCESS,
+            payload: res.data,
+          });
+          navigation.navigate("MainStack")
 
-      name: "Ali Zaib",
-      email: "alizaib1217@gmail.com",
-      token: "abcd"
-    };
-    AsyncStorage.setItem("USER", JSON.stringify(user));
-    AsyncStorage.setItem("TOKEN", JSON.stringify(user.token));
-    dispatch({
-      type: REGISTER_USER_SUCCESS,
-      payload: user,
-    });
+        } else {
+          dispatch({
+            type: REGISTER_USER_FAILURE,
+            payload: res.message
+          })
+        }
+      })
+      .catch(err => {
+        // console.warn(err);
+        // console.warn("Invalid email");
+
+      });
   };
 }

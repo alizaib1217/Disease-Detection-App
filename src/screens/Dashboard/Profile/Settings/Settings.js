@@ -26,12 +26,16 @@ export default class Settings extends React.Component {
             source={require("../../../../../assets/images/logo.png")}
             style={styles.logo}
           />
-          <SettingsItem text={"Terms & Services"} onPress={() => null}/>
-          <SettingsItem text={"Privacy Policy"} onPress={() => null}/>
-          <SettingsItem text={"Edit Profile"} onPress={() => null}/>
+          <SettingsItem text={"Terms & Services"} onPress={() => this.props.navigation.navigate("TermsAndServices")}/>
+          <SettingsItem text={"Privacy Policy"} onPress={() => this.props.navigation.navigate("PrivacyPolicy")}/>
+          {/*<SettingsItem text={"Edit Profile"} onPress={() => null}/>*/}
         </Content>
         <Button
-          onPress={() => this.props.navigation.navigate("Auth")}
+          onPress={() => {
+            AsyncStorage.clear();
+
+            this.props.navigation.navigate("Auth")
+          }}
           gradientStyle={{width: wp("80%"),alignSelf:"center"}}
           text={"Logout"}
         />

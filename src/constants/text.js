@@ -21,6 +21,8 @@ const ItemText = {
   Profile: (style = {}) => <ResponsiveText style={{...styles.defaultText, ...style}}>Profile</ResponsiveText>,
   Settings: (style = {}) => <ResponsiveText style={{...styles.defaultText, ...style}}>Settings</ResponsiveText>,
   AddTest: (style = {}) => <ResponsiveText style={{...styles.defaultText, ...style}}>Disease Detection</ResponsiveText>,
+  Terms: (style = {}) => <ResponsiveText style={{...styles.defaultText, ...style}}>Terms & Condition</ResponsiveText>,
+  Privacy: (style = {}) => <ResponsiveText style={{...styles.defaultText, ...style}}>Privacy Policy</ResponsiveText>,
   Text: (style = {}, text = "") => <ResponsiveText style={{...styles.defaultText, ...style}}>{text}</ResponsiveText>,
 };
 export default ItemText;

@@ -6,6 +6,8 @@ import Settings from "../screens/Dashboard/Profile/Settings/Settings";
 import LungsDisease from "../screens/Dashboard/TestDisease/LungsDisease/LungsDisease";
 import DiabeticRetinopathy from "../screens/Dashboard/TestDisease/DiabeticRetinopathy/DiabeticRetinopathy";
 import KneeMri from "../screens/Dashboard/TestDisease/KneeMri/KneeMri";
+import TermsAndServices from "../screens/Dashboard/Profile/Settings/static/TermsAndServices";
+import PrivacyPolicy from "../screens/Dashboard/Profile/Settings/static/PrivacyPolicy";
 
 const MainStack = createStackNavigator(
   {
@@ -15,6 +17,8 @@ const MainStack = createStackNavigator(
     LungsDisease:LungsDisease,
     DiabeticRetinopathy:DiabeticRetinopathy,
     KneeMri:KneeMri,
+    TermsAndServices:TermsAndServices,
+    PrivacyPolicy:PrivacyPolicy,
   },
   {
     initialRouteName: "Dashboard",

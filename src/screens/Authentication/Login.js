@@ -16,8 +16,8 @@ const {width} = Dimensions.get('window');
 
 class Login extends React.Component {
   state = {
-    email: "",
-    password: "",
+    email: "saad12150@gmail.com",
+    password: "saadmasood",
     errorMessage: ""
   };
 
@@ -34,14 +34,15 @@ class Login extends React.Component {
   }
 
   onSignInPress() {
-    this.props.loginUser({}, this.props.navigation);
     let validateEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
     const {email, password} = this.state;
-    this.props.navigation.navigate("Dashboard");
     if (email === "") this.setState({errorMessage: "Please enter email first"});
     else if (!validateEmail.test(email)) this.setState({errorMessage: "Please enter a valid email address"});
     else if (password === "") this.setState({errorMessage: "Please enter your password"});
     else {
+      let body = {email, password};
+      this.props.loginUser(body, this.props.navigation)
+      // this.props.navigation.navigate("Dashboard");
 
     }
   }
@@ -51,13 +52,18 @@ class Login extends React.Component {
   }
 
   getErrorMessage() {
+    const {error} = this.props;
     if (this.state.errorMessage) {
       return (
         <ResponsiveText style={styles.errorMessage}>
           {this.state.errorMessage}
         </ResponsiveText>
       );
-    } else return <ResponsiveText style={[styles.errorMessage, {color: 'transparent'}]}>Hidden</ResponsiveText>;
+    } else if (error) return (
+      <ResponsiveText style={styles.errorMessage}>
+        Email or Password is Incorrect
+      </ResponsiveText>);
+    else return <ResponsiveText style={[styles.errorMessage, {color: 'transparent'}]}>Hidden</ResponsiveText>;
   }
 
   render() {
@@ -102,6 +108,7 @@ class Login extends React.Component {
                 </ResponsiveText>
               </TouchableOpacity>
               <Button
+                loading={this.props.isFetching}
                 onPress={this.onSignInPress.bind(this)}
                 text={"Login"}
               />
@@ -123,8 +130,6 @@ class Login extends React.Component {
             </View>
           </View>
         </View>
-
-
       </Container>
     );
   }
@@ -133,7 +138,9 @@ class Login extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.userAuth
+    user: state.userAuth.user,
+    isFetching: state.userAuth.isFetching,
+    error: state.userAuth.error
   }
 };
 const mapDispatchToProps = dispatch => {
@@ -168,6 +175,8 @@ const styles = {
   errorMessage: {
     marginVertical: 5,
     alignSelf: 'center',
+    color:Color.Primary
+
   },
 
   forgotPasswordContainer: {

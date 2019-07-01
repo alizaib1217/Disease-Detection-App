@@ -27,7 +27,7 @@ export default function userAuthReducer(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        user: action.payload,
+        user: action.payload.user,
         token: action.payload.token,
         error: false
       };
@@ -36,19 +36,19 @@ export default function userAuthReducer(state = initialState, action) {
         ...state,
         isFetching: false,
         error: true,
-        user: action.payload
+        // user: action.payload
       };
     case REGISTER_USER_START:
+
       return {
         ...state,
-
         isFetching: true,
       };
     case REGISTER_USER_SUCCESS:
       return {
         ...state,
         isFetching: false,
-        user: action.payload,
+        user: action.payload.user,
         token: action.payload.token,
         error: false
 
